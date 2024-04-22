@@ -1,0 +1,65 @@
+<h1>All Items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Stock</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @items.each do |item| %>
+    <tr>
+      <td><%= item.name %></td>
+      <td>
+        <%= form_tag update_price_item_path(item), method: :patch do %>
+          <div style="display: inline-block;">
+            <%= number_field_tag 'item[price]', item.price %>
+          </div>
+          <%= submit_tag "Update Price" %>
+        <% end %>
+      </td>
+      <td>
+        <div style="display: inline-block;">
+          <%= button_to "-", decrease_item_stock_path(item), method: :patch %>
+        </div>
+        <%= item.stock %>
+        <div style="display: inline-block;">
+          <%= button_to "+", increase_item_stock_path(item), method: :patch %>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+</tbody>
+
+</table>
+
+<br>
+
+<%= form_for @item, url: items_path, method: :post, html: { class: "form" } do |f| %>
+  <table class="form">
+    <tr>
+      <td><%= f.label :name, class: "control-label" %></td>
+      <td><%= f.text_field :name, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :type, class: "control-label" %></td>
+      <td><%= f.text_field :type, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :price, class: "control-label" %></td>
+      <td><%= f.text_field :price, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :stock, class: "control-label" %></td>
+      <td><%= f.text_field :stock, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <td colspan="2"><%= f.submit "Add Item", class: "btn btn-primary" %></td>
+    </tr>
+  </table>
+<% end %>
+
+
+
