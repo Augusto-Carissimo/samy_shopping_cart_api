@@ -25,6 +25,13 @@ RSpec.describe CartItem do
       expect(cart_item_invalid).not_to be_valid
       expect(cart_item_invalid.errors[:quantity]).to include("there is not stock for this item")
     end
+
+    it 'is invalid when updated the quantity more than stock' do
+      cart_item_updated = CartItem.new(item: item, cart: Cart.create, quantity: 10)
+      expect(cart_item_updated).to be_valid
+      cart_item_updated.update(quantity: cart_item_updated.quantity + 1)
+      expect(cart_item_updated).not_to be_valid
+    end
   end
 
   describe 'check uniqueness of item in cart' do
