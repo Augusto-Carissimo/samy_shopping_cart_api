@@ -16,7 +16,9 @@ class CartItem < ApplicationRecord
   end
 
   def item_must_be_unique_in_cart
-    if CartItem.exists?(cart_id: cart_id, item_id: item_id)
+    existing_cart_item = CartItem.find_by(cart_id: cart_id, item_id: item_id)
+
+    if existing_cart_item && existing_cart_item != self
       errors.add(:item_id, "already exists in the cart")
     end
   end

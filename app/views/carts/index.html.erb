@@ -1,0 +1,58 @@
+<h1>Lista de productos </h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th>Stock</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= item.price %></td>
+        <td><%= item.stock %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h1>Carro de compras </h1>
+
+<table >
+  <thead>
+    <tr>
+      <th>Nombre del item</th>
+      <th>Tipo de item</th>
+      <th>Unidades</th>
+      <th>Precio unitario</th>
+      <th>Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @cart && @cart.cart_items.any? %>
+      <% @cart.cart_items.each do |cart_item| %>
+        <tr>
+          <td><%= cart_item.item.name %></td>
+          <td><%= cart_item.item.type %></td>
+          <td>
+            <div style="display: inline-block;">
+              <%= button_to '-', decrease_cart_item_quantity_path(cart_item), method: :patch %>
+
+            </div>
+
+            <%= cart_item.quantity %>
+
+            <div style="display: inline-block;">
+              <%= button_to '+', increase_cart_item_quantity_path(cart_item), method: :patch %>
+            </div>
+          </td>
+          <td><%= cart_item.item.price %></td>
+          <td><%= cart_item.item.price * cart_item.quantity %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>
