@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   patch '/items/:id/increase_stock', to: 'items#increase_stock', as: 'increase_item_stock'
   patch '/items/:id/decrease_stock', to: 'items#decrease_stock', as: 'decrease_item_stock'
 
+  resources :carts
 end
