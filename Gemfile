@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.2'
 gem 'bootsnap', require: false
+gem 'importmap-rails'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.8', '>= 7.0.8.1'
 gem 'sprockets-rails'
