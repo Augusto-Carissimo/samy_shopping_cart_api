@@ -2,14 +2,14 @@
   <%= button_to "Cart", root_path, method: :get, class: "btn btn-primary" %>
 </div>
 
-<h1>All Items</h1>
+<h1> Productos </h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Stock</th>
+      <th> Nombre </th>
+      <th> Precio </th>
+      <th> Stock </th>
     </tr>
   </thead>
   <tbody>
@@ -58,6 +58,14 @@
     <tr>
       <td><%= f.label :stock, class: "control-label" %></td>
       <td><%= f.text_field :stock, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :description, class: "control-label" %></td>
+      <td><%= f.text_field :description, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :thumbnail, class: "control-label" %></td>
+      <td><%= f.text_field :thumbnail, class: "form-control" %></td>
     </tr>
     <tr>
       <td colspan="2"><%= f.submit "Add Item", class: "btn btn-primary" %></td>
