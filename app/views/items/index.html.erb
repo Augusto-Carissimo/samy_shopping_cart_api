@@ -2,7 +2,7 @@
   <%= button_to "Cart", root_path, method: :get, class: "btn btn-primary" %>
 </div>
 
-<h1> Productos </h1>
+<h1> Items </h1>
 
 <table>
   <thead>
@@ -41,15 +41,43 @@
 
 <br>
 
-<%= form_for @item, url: items_path, method: :post, html: { class: "form" } do |f| %>
+<h3> Nuevo producto </h3>
+
+<%= form_for @product, url: products_path, method: :post, html: { class: "form" } do |f| %>
   <table class="form">
     <tr>
       <td><%= f.label :name, class: "control-label" %></td>
       <td><%= f.text_field :name, class: "form-control" %></td>
     </tr>
     <tr>
-      <td><%= f.label :type, class: "control-label" %></td>
-      <td><%= f.text_field :type, class: "form-control" %></td>
+      <td><%= f.label :price, class: "control-label" %></td>
+      <td><%= f.text_field :price, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :stock, class: "control-label" %></td>
+      <td><%= f.text_field :stock, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :description, class: "control-label" %></td>
+      <td><%= f.text_field :description, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :thumbnail, class: "control-label" %></td>
+      <td><%= f.text_field :thumbnail, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <td colspan="2"><%= f.submit "Add Item", class: "btn btn-primary" %></td>
+    </tr>
+  </table>
+<% end %>
+
+
+<h3> Nuevo evento </h3>
+<%= form_for @event, url: events_path, method: :post, html: { class: "form" } do |f| %>
+  <table class="form">
+    <tr>
+      <td><%= f.label :name, class: "control-label" %></td>
+      <td><%= f.text_field :name, class: "form-control" %></td>
     </tr>
     <tr>
       <td><%= f.label :price, class: "control-label" %></td>

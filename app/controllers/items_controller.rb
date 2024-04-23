@@ -1,7 +1,9 @@
 class ItemsController < ApplicationController
   def index
     @items = Item.all
-    @item = Item.new
+    @product = Product.new
+    @event = Event.new
+
   end
 
   def create
