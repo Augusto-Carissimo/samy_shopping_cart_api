@@ -19,7 +19,7 @@
       <td>
         <%= form_tag update_price_item_path(item), method: :patch do %>
           <div style="display: inline-block;">
-            <%= number_field_tag 'item[price]', item.price %>
+            <%= number_field_tag 'item[price]', item.price %>€
           </div>
           <%= submit_tag "Update Price" %>
         <% end %>
