@@ -4,26 +4,26 @@
 
 <h1> Lista de productos </h1>
 
-<table>
+<table style="width: 80%; border-collapse: collapse;">
   <thead>
     <tr>
-      <th> Nombre </th>
-      <th> Precio </th>
-      <th> Stock </th>
-      <th> Agregar a Carrito </th>
+      <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;">Nombre</th>
+      <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;">Precio</th>
+      <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;">Stock</th>
+      <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2; text-align: center;">Agregar a Carrito</th>
     </tr>
   </thead>
   <tbody>
     <% @items.each do |item| %>
       <tr>
-        <td><%= item.name %></td>
-        <td><%= item.price %></td>
-        <td><%= item.stock %></td>
-        <td>
+        <td style="border: 1px solid #ddd; padding: 8px;"><%= item.name %></td>
+        <td style="border: 1px solid #ddd; padding: 8px;">$ <%= item.price %></td>
+        <td style="border: 1px solid #ddd; padding: 8px;"><%= item.stock %></td>
+        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
           <div style="display: inline-block;">
             <%= form_with(model: @cart_item, url: cart_items_path, method: :post) do |form| %>
               <%= form.hidden_field :item_id, value: item.id %>
-              <%= form.submit 'Add to Cart' %>
+              <%= form.submit 'Add to Cart', style: "background-color: #4CAF50; color: white; padding: 8px 20px; border: none; border-radius: 4px; cursor: pointer;" %>
             <% end %>
           </div>
         </td>
@@ -32,40 +32,51 @@
   </tbody>
 </table>
 
-<h1>Carrito de compras </h1>
 
-<table >
+<h3> Carrito de compras </h3>
+
+<table style="border-collapse: collapse; width: 80%;">
   <thead>
-    <tr>
-      <th> Nombre del item</th>
-      <th> Tipo de item</th>
-      <th> Unidades </th>
-      <th> Precio unitario </th>
-      <th> Subtotal </th>
+    <tr style="border-bottom: 1px solid black;">
+      <th style="border-right: 1px solid black; padding: 8px;">Nombre del item</th>
+      <th style="border-right: 1px solid black; padding: 8px;">Tipo de item</th>
+      <th style="border-right: 1px solid black; padding: 8px;">Unidades</th>
+      <th style="border-right: 1px solid black; padding: 8px;">Precio unitario</th>
+      <th style="padding: 8px;">Subtotal</th>
     </tr>
   </thead>
   <tbody>
     <% if @cart && @cart.cart_items.any? %>
+      <% subtotal = 0 %>
+      <% total_quantity = 0 %>
       <% @cart.cart_items.each do |cart_item| %>
-        <tr>
-          <td><%= cart_item.item.name %></td>
-          <td><%= cart_item.item.is_a?(Product) ? 'Producto' : 'Evento' %></td>
-          <td>
+        <tr style="border-bottom: 1px solid black;">
+          <td style="border-right: 1px solid black; padding: 8px;"><%= cart_item.item.name %></td>
+          <td style="border-right: 1px solid black; padding: 8px;"><%= cart_item.item.is_a?(Product) ? 'Producto' : 'Evento' %></td>
+          <td style="border-right: 1px solid black; padding: 8px;">
             <div style="display: inline-block;">
               <%= button_to '-', decrease_cart_item_quantity_path(cart_item), method: :patch %>
-
             </div>
-
             <%= cart_item.quantity %>
-
             <div style="display: inline-block;">
               <%= button_to '+', increase_cart_item_quantity_path(cart_item), method: :patch %>
             </div>
           </td>
-          <td><%= cart_item.item.price %></td>
-          <td><%= cart_item.item.price * cart_item.quantity %></td>
+          <td style="border-right: 1px solid black; padding: 8px;"><%= cart_item.item.price %></td>
+          <td style="padding: 8px;"><%= cart_item.item.price * cart_item.quantity %></td>
+          <% subtotal += cart_item.item.price * cart_item.quantity %>
+          <% total_quantity += cart_item.quantity %>
+          <td style="padding: 8px;">
+            <%= button_to 'X', cart_item_path(cart_item), method: :delete, data: { confirm: "¿Estás seguro de que deseas eliminar este elemento del carrito?" }, class: "btn btn-danger btn-sm" %>
+          </td>
         </tr>
       <% end %>
-    </tbody>
-  <% end %>
+      <tr style="border-bottom: 1px solid black;">
+        <td colspan="2" style="border-right: 1px solid black; padding: 8px;"><strong>Total:</strong></td>
+        <td style="border-right: 1px solid black; padding: 8px;" colspan="2"><%= total_quantity %></td>
+        <td style="padding: 8px;"><%= subtotal %></td>
+        <td></td> <!-- Empty cell for the "Remove" button in the last row -->
+      </tr>
+    <% end %>
+  </tbody>
 </table>
