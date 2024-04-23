@@ -1,15 +1,16 @@
+# frozen_string_literal: true
+
 class ItemsController < ApplicationController
   def index
     @items = Item.all
     @product = Product.new
     @event = Event.new
-
   end
 
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to items_path, notice: "Item was successfully created."
+      redirect_to items_path, notice: 'Item was successfully created.'
     else
       @items = Item.all
       render :index
@@ -23,7 +24,7 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     if @item.update(item_params)
-      redirect_to items_path, notice: "Item was successfully updated."
+      redirect_to items_path, notice: 'Item was successfully updated.'
     else
       render :edit
     end

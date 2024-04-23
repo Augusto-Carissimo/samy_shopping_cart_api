@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CartItem < ApplicationRecord
   belongs_to :item, required: true
   belongs_to :cart, required: true
@@ -10,16 +12,16 @@ class CartItem < ApplicationRecord
   private
 
   def quantity_cannot_be_more_than_stock
-    if item.present? && quantity.present? && quantity > item.stock
-      errors.add(:quantity, "there is not stock for this item")
-    end
+    return unless item.present? && quantity.present? && quantity > item.stock
+
+    errors.add(:quantity, 'there is not stock for this item')
   end
 
   def item_must_be_unique_in_cart
-    existing_cart_item = CartItem.find_by(cart_id: cart_id, item_id: item_id)
+    existing_cart_item = CartItem.find_by(cart_id:, item_id:)
 
-    if existing_cart_item && existing_cart_item != self
-      errors.add(:item_id, "already exists in the cart")
-    end
+    return unless existing_cart_item && existing_cart_item != self
+
+    errors.add(:item_id, 'already exists in the cart')
   end
 end
