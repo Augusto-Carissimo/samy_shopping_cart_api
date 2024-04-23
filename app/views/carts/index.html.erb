@@ -1,4 +1,4 @@
-<div style="text-align: right; margin-bottom: 10px;">
+<div style="text-align: left; margin-bottom: 10px;">
   <%= button_to "Admin", items_path, method: :get, class: "btn btn-primary" %>
 </div>
 
@@ -10,6 +10,7 @@
       <th> Nombre </th>
       <th> Precio </th>
       <th> Stock </th>
+      <th> Agregar a Carrito </th>
     </tr>
   </thead>
   <tbody>
@@ -18,12 +19,20 @@
         <td><%= item.name %></td>
         <td><%= item.price %></td>
         <td><%= item.stock %></td>
+        <td>
+          <div style="display: inline-block;">
+            <%= form_with(model: @cart_item, url: cart_items_path, method: :post) do |form| %>
+              <%= form.hidden_field :item_id, value: item.id %>
+              <%= form.submit 'Add to Cart' %>
+            <% end %>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<h1>Carro de compras </h1>
+<h1>Carrito de compras </h1>
 
 <table >
   <thead>
