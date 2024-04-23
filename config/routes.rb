@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :items, only: [:index]
   resources :cart_items, only: [:create, :destroy]
+  resources :products
+  resources :events
 
   patch '/cart_items/:id/increase_quantity', to: 'cart_items#increase_quantity', as: 'increase_cart_item_quantity'
   patch '/cart_items/:id/decrease_quantity', to: 'cart_items#decrease_quantity', as: 'decrease_cart_item_quantity'
