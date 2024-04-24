@@ -9,11 +9,10 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     if @product.save
       flash[:success] = 'Product successfully created.'
-      redirect_to products_path
     else
       flash.now[:error] = 'Failed to create product.'
-      render :new
     end
+    redirect_to items_path
   end
 
   private
