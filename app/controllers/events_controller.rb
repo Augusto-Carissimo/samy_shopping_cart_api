@@ -9,11 +9,10 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     if @event.save
       flash[:success] = 'Event successfully created.'
-      redirect_to events_path
     else
       flash.now[:error] = 'Failed to create event.'
-      render :new
     end
+    redirect_to items_path
   end
 
   private
