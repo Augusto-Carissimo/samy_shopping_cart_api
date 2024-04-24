@@ -7,17 +7,6 @@ class ItemsController < ApplicationController
     @event = Event.new
   end
 
-  def create
-    @item = Item.new(item_params)
-    if @item.save
-      flash.now[:error] = 'Item was successfully created.'
-      redirect_to items_path
-    else
-      @items = Item.all
-      render :index
-    end
-  end
-
   def edit
     @item = Item.find(params[:id])
   end
