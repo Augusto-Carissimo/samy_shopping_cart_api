@@ -14,20 +14,20 @@ RSpec.describe CartItem do
     it { is_expected.to validate_numericality_of(:quantity).is_greater_than_or_equal_to(0) }
   end
 
-  describe "check for sufficient stock" do
-    it "is valid when quantity is less than or equal to stock" do
-      cart_item_valid = CartItem.new(item: item, cart: Cart.create, quantity: 5)
+  describe 'check for sufficient stock' do
+    it 'is valid when quantity is less than or equal to stock' do
+      cart_item_valid = CartItem.new(item:, cart: Cart.create, quantity: 5)
       expect(cart_item_valid).to be_valid
     end
 
-    it "is invalid when quantity is more than stock" do
-      cart_item_invalid = CartItem.new(item: item, cart: Cart.create, quantity: 15)
+    it 'is invalid when quantity is more than stock' do
+      cart_item_invalid = CartItem.new(item:, cart: Cart.create, quantity: 15)
       expect(cart_item_invalid).not_to be_valid
-      expect(cart_item_invalid.errors[:quantity]).to include("there is not stock for this item")
+      expect(cart_item_invalid.errors[:quantity]).to include('there is not stock for this item')
     end
 
     it 'is invalid when updated the quantity more than stock' do
-      cart_item_updated = CartItem.new(item: item, cart: Cart.create, quantity: 10)
+      cart_item_updated = CartItem.new(item:, cart: Cart.create, quantity: 10)
       expect(cart_item_updated).to be_valid
       cart_item_updated.update(quantity: cart_item_updated.quantity + 1)
       expect(cart_item_updated).not_to be_valid
@@ -35,7 +35,7 @@ RSpec.describe CartItem do
   end
 
   describe 'check uniqueness of item in cart' do
-    let(:cart_item) { FactoryBot.create(:cart_item, item: item) }
+    let(:cart_item) { FactoryBot.create(:cart_item, item:) }
 
     it 'cant add item to cart if already exists in it' do
       cart_item_with_existing_item_in_cart = CartItem.new(item: cart_item.item, cart: cart_item.cart)
