@@ -62,8 +62,8 @@
               <%= button_to '+', increase_cart_item_quantity_path(cart_item), method: :patch %>
             </div>
           </td>
-          <td style="border-right: 1px solid black; padding: 8px;"><%= cart_item.item.price %></td>
-          <td style="padding: 8px;"><%= cart_item.item.price * cart_item.quantity %></td>
+          <td style="border-right: 1px solid black; padding: 8px;"><%= cart_item.item.price %>€</td>
+          <td style="padding: 8px;"><%= cart_item.item.price * cart_item.quantity %>€</td>
           <% subtotal += cart_item.item.price * cart_item.quantity %>
           <% total_quantity += cart_item.quantity %>
           <td style="padding: 8px;">
@@ -74,7 +74,7 @@
       <tr style="border-bottom: 1px solid black;">
         <td colspan="2" style="border-right: 1px solid black; padding: 8px;"><strong>Total:</strong></td>
         <td style="border-right: 1px solid black; padding: 8px;" colspan="2"><%= total_quantity %></td>
-        <td style="padding: 8px;"><%= subtotal %></td>
+        <td style="padding: 8px;"><%= subtotal %>€</td>
         <td></td> <!-- Empty cell for the "Remove" button in the last row -->
       </tr>
     <% end %>
