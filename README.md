@@ -27,3 +27,12 @@ sudo docker run -p 3000:3000 samy_shopping_card_api
 * Creación de users con Device gem.
 * Asignación de un Cart por User en vez de `cart = Cart.first_or_create` único en la aplicación.
 * Thumbnails linkeados con Cloudinary para el display de imágenes de productos.
+
+### Gems utilizadas
+
+* rubocop
+* rspec
+* factory_bot_rails
+* faker
+
+Ruby 3.2.2
