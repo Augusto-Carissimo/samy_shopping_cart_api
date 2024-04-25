@@ -11,6 +11,9 @@ clone git@github.com:Augusto-Carissimo/samy_shopping_cart_api.git
 sudo docker build samy_shopping_card_api .
 sudo docker run -p 3000:3000 samy_shopping_card_api
 ```
+Para los tests ejecutar: 
+``` rspec ```
+
 ### Implementacion:
 * Para priorizar el tiempo decidí utilizar una implementación REST (salvo por algún custom endpoints) y usar sqlite3.
 * Utilice TDD (Test-driven development) para la implementación, especialmente a la hora de diseñar el modelo de datos y sus validaciones.
